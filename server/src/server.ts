@@ -5,6 +5,7 @@ import { userRoutes } from './routes/user';
 import { guessRoutes } from './routes/guess';
 import { gameRoutes } from './routes/game';
 import { authRoutes } from './routes/auth';
+import jwt from '@fastify/jwt'
 
 async function bootstrap() {
     const fastify = Fastify({
@@ -13,6 +14,10 @@ async function bootstrap() {
 
     await fastify.register(cors, {
         origin: true
+    })
+
+    await fastify.register(jwt, {
+        secret: 'secretbolão'
     })
 
     await fastify.register(authRoutes)
